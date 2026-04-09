@@ -76,22 +76,38 @@
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
-  -webkit-text-size-adjust: 100%;
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Prevent body scrolling entirely */
 }
 
 body {
   font-family: var(--font-sans);
   background: var(--bg-dark);
   color: #fff;
-  overflow-x: hidden;
-  overflow-y: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
 }
 
-body.scrollable {
+/* The true scroll container */
+.scroll-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: hidden; /* Hidden until play is clicked */
+  scroll-behavior: smooth;
+}
+
+.scroll-container.scrollable {
   overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  -webkit-overflow-scrolling: touch;
 }
 
 img, svg {
@@ -173,14 +189,54 @@ button {
    ======================== */
 section {
   position: relative;
+  height: 100vh;
+  height: 100dvh;
   min-height: 100vh;
   min-height: 100dvh;
+  max-height: 100vh;
+  max-height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: var(--section-py) var(--section-px);
   overflow: hidden;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* -- Swipe Hint (bottom of each section) -- */
+.swipe-hint {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  z-index: var(--z-content);
+  opacity: 0.4;
+  animation: swipeHintPulse 2.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.swipe-hint span {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 1.5px;
+  text-transform: lowercase;
+}
+
+.swipe-hint svg {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+@keyframes swipeHintPulse {
+  0%, 100% { opacity: 0.35; transform: translateX(-50%) translateY(0); }
+  50% { opacity: 0.6; transform: translateX(-50%) translateY(4px); }
 }
 
 .track-bg {
@@ -883,17 +939,16 @@ section {
    11. PROPOSAL — UP Theme
    ======================== */
 #proposal {
-  min-height: 110vh;
-  min-height: 110dvh;
   background: linear-gradient(180deg,
     var(--bg-dark) 0%,
-    #0a1628 10%,
-    #1a3a5c 30%,
-    var(--sky-top) 50%,
-    var(--sky-blue) 70%,
+    #0a1628 8%,
+    #1a3a5c 25%,
+    var(--sky-top) 45%,
+    var(--sky-blue) 65%,
     var(--sky-light) 100%
   );
-  padding-bottom: 100px;
+  padding-bottom: 40px;
+  padding-top: 40px;
 }
 
 /* -- Balloons -- */

@@ -119,7 +119,8 @@
 
       // Enable scrolling
       setTimeout(() => {
-        document.body.classList.add('scrollable');
+        const scrollContainer = document.getElementById('scroll-container');
+        if (scrollContainer) scrollContainer.classList.add('scrollable');
 
         // Initialize GSAP animations
         animations.init();
@@ -169,6 +170,7 @@
         });
       },
       {
+        root: document.getElementById('scroll-container'),
         threshold: [0.35],
         rootMargin: '0px',
       }

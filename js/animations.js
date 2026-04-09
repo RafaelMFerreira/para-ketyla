@@ -11,6 +11,10 @@ class SiteAnimations {
   init() {
     if (this.initialized) return;
     gsap.registerPlugin(ScrollTrigger);
+    
+    // Set default scroller to our new container
+    ScrollTrigger.defaults({ scroller: '#scroll-container' });
+    
     this.initialized = true;
 
     // Small delay to ensure DOM is ready
@@ -236,21 +240,34 @@ class SiteAnimations {
       });
     }
 
-    // Bus drives across (slow, cinematic)
+    // Bus drives across (auto-play when section enters)
     if (bus) {
-      gsap.fromTo(bus,
-        { x: -200 },
-        {
-          x: window.innerWidth + 200,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: section,
-            start: 'top 80%',
-            end: 'bottom 30%',
-            scrub: 3,
-          }
-        }
-      );
+      gsap.set(bus, { x: -200 });
+
+      ScrollTrigger.create({
+        trigger: section,
+        start: 'top 60%',
+        onEnter: () => {
+          gsap.fromTo(bus,
+            { x: -200 },
+            {
+              x: window.innerWidth + 200,
+              duration: 8,
+              ease: 'power1.inOut',
+            }
+          );
+        },
+        onEnterBack: () => {
+          gsap.fromTo(bus,
+            { x: window.innerWidth + 200 },
+            {
+              x: -200,
+              duration: 8,
+              ease: 'power1.inOut',
+            }
+          );
+        },
+      });
     }
 
     // Fireflies activate on section enter
@@ -309,19 +326,17 @@ class SiteAnimations {
     const lensFlare = document.getElementById('lens-flare');
     const secondaryLyric = section.querySelector('.lyric.secondary');
 
-    // Lens flare
+    // Lens flare (auto play on enter)
     if (lensFlare) {
       gsap.fromTo(lensFlare,
         { opacity: 0, scale: 0.5, x: 50 },
         {
           opacity: 1, scale: 1, x: 0,
-          duration: 2,
+          duration: 3,
           ease: 'power2.out',
           scrollTrigger: {
             trigger: section,
-            start: 'top 50%',
-            end: 'bottom 50%',
-            scrub: 2,
+            start: 'top 60%',
           }
         }
       );
