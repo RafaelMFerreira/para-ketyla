@@ -11,10 +11,10 @@ class SiteAnimations {
   init() {
     if (this.initialized) return;
     gsap.registerPlugin(ScrollTrigger);
-    
+
     // Set default scroller to our new container
     ScrollTrigger.defaults({ scroller: '#scroll-container' });
-    
+
     this.initialized = true;
 
     // Small delay to ensure DOM is ready
@@ -240,30 +240,34 @@ class SiteAnimations {
       });
     }
 
-    // Bus drives across (auto-play when section enters)
+    // Bus drives across (auto-play when section enters, loops infinitely)
     if (bus) {
-      gsap.set(bus, { x: -200 });
+      gsap.set(bus, { x: -250 });
 
       ScrollTrigger.create({
         trigger: section,
         start: 'top 60%',
         onEnter: () => {
           gsap.fromTo(bus,
-            { x: -200 },
+            { x: -250 },
             {
-              x: window.innerWidth + 200,
-              duration: 8,
+              x: "120vw",
+              duration: 10,
               ease: 'power1.inOut',
+              repeat: -1,
+              repeatDelay: 0,
             }
           );
         },
-        onEnterBack: () => {
+        onEnterBack: () => { // Reset and play again if scrolling up to it
           gsap.fromTo(bus,
-            { x: window.innerWidth + 200 },
+            { x: -250 },
             {
-              x: -200,
-              duration: 8,
+              x: "120vw",
+              duration: 10,
               ease: 'power1.inOut',
+              repeat: -1,
+              repeatDelay: 0,
             }
           );
         },
@@ -323,23 +327,71 @@ class SiteAnimations {
     const section = document.getElementById('signofthetimes');
     if (!section) return;
 
-    const lensFlare = document.getElementById('lens-flare');
+    const tauCeti = document.getElementById('tau-ceti');
+    const hailMary = document.getElementById('hail-mary');
+    const rockyBubble = document.getElementById('rocky-bubble');
     const secondaryLyric = section.querySelector('.lyric.secondary');
 
-    // Lens flare (auto play on enter)
-    if (lensFlare) {
-      gsap.fromTo(lensFlare,
-        { opacity: 0, scale: 0.5, x: 50 },
+    // Tau Ceti (fade in)
+    if (tauCeti) {
+      gsap.fromTo(tauCeti,
+        { opacity: 0, scale: 0.8 },
         {
-          opacity: 1, scale: 1, x: 0,
-          duration: 3,
+          opacity: 1, scale: 1,
+          duration: 4,
           ease: 'power2.out',
           scrollTrigger: {
             trigger: section,
-            start: 'top 60%',
+            start: 'top 50%',
           }
         }
       );
+    }
+
+    // Hail Mary spaceship flying
+    if (hailMary && rockyBubble) {
+      gsap.set([hailMary, rockyBubble], { x: -60, y: 100, opacity: 0 });
+
+      ScrollTrigger.create({
+        trigger: section,
+        start: 'top 40%',
+        onEnter: () => {
+          // Hail Mary
+          gsap.fromTo(hailMary,
+            { x: -100, y: 150, opacity: 0 },
+            {
+              x: "150vw", y: "-50vh", opacity: 1,
+              duration: 14,
+              ease: 'power1.inOut',
+              repeat: -1,
+              repeatDelay: 0,
+            }
+          );
+
+          // Rocky Bubble (following Hail Mary)
+          gsap.fromTo(rockyBubble,
+            { x: -150, y: 180, opacity: 0 },
+            {
+              x: "150vw", y: "-50vh", opacity: 1,
+              duration: 14,
+              ease: 'power1.inOut',
+              delay: 0.5,
+              repeat: -1,
+              repeatDelay: 0,
+            }
+          );
+        },
+        onEnterBack: () => { // Reset and play again if scrolling up to it
+          gsap.fromTo(hailMary,
+            { x: -100, y: 150, opacity: 0 },
+            { x: "150vw", y: "-50vh", opacity: 1, duration: 14, ease: 'power1.inOut', repeat: -1, repeatDelay: 0 }
+          );
+          gsap.fromTo(rockyBubble,
+            { x: -150, y: 180, opacity: 0 },
+            { x: "150vw", y: "-50vh", opacity: 1, duration: 14, ease: 'power1.inOut', delay: 0.5, repeat: -1, repeatDelay: 0 }
+          );
+        }
+      });
     }
 
     // Secondary lyrics

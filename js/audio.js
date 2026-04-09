@@ -103,7 +103,7 @@ class AudioManager {
     }
 
     // Crossfade
-    this.crossfade(oldTrack, newTrack, 2500);
+    this.crossfade(oldTrack, newTrack, 1200);
   }
 
   /**

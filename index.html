@@ -312,7 +312,71 @@
   <!-- ======================== -->
   <section id="signofthetimes" class="track">
     <div class="track-bg"></div>
-    <div class="lens-flare" id="lens-flare"></div>
+    <div class="tau-ceti" id="tau-ceti" aria-hidden="true">
+      <div class="sun-glow"></div>
+      <div class="sun-core"></div>
+      <div class="sun-rays"></div>
+    </div>
+
+    <!-- Space elements -->
+    <div class="space-scene" id="hail-mary-scene">
+      <!-- The Hail Mary Spaceship -->
+      <div class="hail-mary" id="hail-mary">
+        <svg viewBox="0 0 60 200" class="hail-mary-svg" aria-label="Hail Mary spaceship">
+          <!-- Engine plume -->
+          <path d="M20,180 Q30,220 40,180 Z" fill="#66aaff" opacity="0.8" class="engine-plume"/>
+          <path d="M25,180 Q30,210 35,180 Z" fill="#ffffff" opacity="0.9" class="engine-plume-inner"/>
+          
+          <!-- Engines -->
+          <rect x="15" y="160" width="30" height="20" rx="2" fill="#333"/>
+          <rect x="20" y="175" width="20" height="5" fill="#222"/>
+          
+          <!-- Fuel Bay (Tower) -->
+          <rect x="22" y="80" width="16" height="80" fill="#bbb"/>
+          <line x1="22" y1="100" x2="38" y2="100" stroke="#999" stroke-width="1"/>
+          <line x1="22" y1="120" x2="38" y2="120" stroke="#999" stroke-width="1"/>
+          <line x1="22" y1="140" x2="38" y2="140" stroke="#999" stroke-width="1"/>
+          
+          <!-- Connecting Truss -->
+          <rect x="26" y="50" width="8" height="30" fill="#666"/>
+          
+          <!-- Crew Module (Top) -->
+          <path d="M20,50 L40,50 L35,20 L25,20 Z" fill="#ccc"/>
+          <path d="M25,20 Q30,5 35,20 Z" fill="#999"/>
+          
+          <!-- Centrifuge folded cables (lines along the side) -->
+          <line x1="20" y1="50" x2="22" y2="80" stroke="#555" stroke-width="1.5"/>
+          <line x1="40" y1="50" x2="38" y2="80" stroke="#555" stroke-width="1.5"/>
+        </svg>
+      </div>
+
+      <!-- Rocky in Xenonite Bubble -->
+      <div class="rocky-bubble" id="rocky-bubble">
+        <svg viewBox="0 0 100 100" class="rocky-svg" aria-label="Rocky the alien">
+          <!-- Xenonite transparent sphere -->
+          <circle cx="50" cy="50" r="45" fill="rgba(150, 200, 255, 0.15)" stroke="rgba(200, 220, 255, 0.4)" stroke-width="2"/>
+          <circle cx="35" cy="35" r="15" fill="rgba(255, 255, 255, 0.2)" filter="blur(2px)"/>
+          
+          <!-- Rocky's body (Rock-like carapace) -->
+          <!-- 5-sided central body -->
+          <polygon points="50,30 65,45 60,65 40,65 35,45" fill="#4a3e35"/>
+          <polygon points="50,35 60,45 55,60 45,60 40,45" fill="#5c4d42"/>
+          
+          <!-- Rocky's 5 arms -->
+          <!-- Top arm waving -->
+          <path d="M50,30 Q55,15 65,15" fill="none" stroke="#4a3e35" stroke-width="5" stroke-linecap="round" class="waving-arm"/>
+          <!-- Other arms -->
+          <path d="M65,45 Q80,50 85,65" fill="none" stroke="#4a3e35" stroke-width="5" stroke-linecap="round"/>
+          <path d="M60,65 Q70,85 55,90" fill="none" stroke="#4a3e35" stroke-width="5" stroke-linecap="round"/>
+          <path d="M40,65 Q30,85 45,90" fill="none" stroke="#4a3e35" stroke-width="5" stroke-linecap="round"/>
+          <path d="M35,45 Q20,50 15,65" fill="none" stroke="#4a3e35" stroke-width="5" stroke-linecap="round"/>
+          
+          <!-- Music notes coming from Rocky! -->
+          <text x="65" y="25" fill="#ffddaa" font-size="12" class="music-note n1">♪</text>
+          <text x="75" y="15" fill="#ffddaa" font-size="16" class="music-note n2">♫</text>
+        </svg>
+      </div>
+    </div>
 
     <div class="track-content cinematic">
       <div class="track-header">

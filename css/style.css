@@ -919,22 +919,110 @@ section {
   margin-bottom: 8px;
 }
 
-/* -- Lens Flare -- */
-.lens-flare {
+/* -- Tau Ceti (Sun) -- */
+.tau-ceti {
   position: absolute;
-  top: 30%;
-  right: -20%;
-  width: 300px;
-  height: 300px;
+  top: 15%;
+  right: -5%;
+  width: 250px;
+  height: 250px;
   border-radius: 50%;
-  background: radial-gradient(circle,
-    rgba(201, 151, 92, 0.08) 0%,
-    rgba(184, 122, 148, 0.04) 40%,
-    transparent 70%
-  );
-  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.sun-core {
+  position: absolute;
+  inset: 30%;
+  background: radial-gradient(circle, #fff 0%, #fffcdd 60%, transparent 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 40px #ffdb99, 0 0 100px #ff9966;
+}
+
+.sun-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,180,100,0.4) 0%, rgba(200,80,50,0.1) 50%, transparent 70%);
+  animation: sunPulse 6s ease-in-out infinite alternate;
+}
+
+@keyframes sunPulse {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  100% { transform: scale(1.1); opacity: 1; }
+}
+
+/* -- Space Scene Container -- */
+.space-scene {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: 2;
   pointer-events: none;
+}
+
+/* -- Hail Mary Ship -- */
+.hail-mary {
+  position: absolute;
+  bottom: 25%;
+  left: -60px;
+  width: 50px;
+  height: auto;
+  transform: rotate(70deg); /* Ship flying pointing somewhat up and right */
+  filter: drop-shadow(0 0 8px rgba(100,180,255,0.4));
+  opacity: 0;
+}
+
+.engine-plume {
+  animation: engineFlicker 0.1s infinite alternate;
+}
+
+.engine-plume-inner {
+  animation: engineFlicker 0.08s infinite alternate-reverse;
+}
+
+@keyframes engineFlicker {
+  0% { transform: scaleY(0.9) translateY(2px); opacity: 0.7; }
+  100% { transform: scaleY(1.1) translateY(0); opacity: 1; }
+}
+
+/* -- Rocky's Bubble -- */
+.rocky-bubble {
+  position: absolute;
+  bottom: 22%;
+  left: -100px;
+  width: 40px;
+  height: 40px;
+  filter: drop-shadow(0 0 6px rgba(150, 200, 255, 0.6));
+  opacity: 0;
+}
+
+.waving-arm {
+  transform-origin: 50px 30px;
+  animation: rockyWave 0.8s ease-in-out infinite alternate;
+}
+
+@keyframes rockyWave {
+  0% { transform: rotate(-15deg); }
+  100% { transform: rotate(20deg); }
+}
+
+.music-note {
+  font-family: Arial, sans-serif;
+  opacity: 0;
+  animation: floatNote 3s ease-out infinite;
+}
+
+.music-note.n1 { animation-delay: 0s; }
+.music-note.n2 { animation-delay: 1.5s; }
+
+@keyframes floatNote {
+  0% { transform: translateY(0) scale(0.5); opacity: 0; }
+  20% { opacity: 1; transform: translateY(-5px) scale(1); }
+  80% { opacity: 0.8; }
+  100% { transform: translateY(-20px) scale(1.5); opacity: 0; }
 }
 
 /* ========================
