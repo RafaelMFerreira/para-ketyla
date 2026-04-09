@@ -132,7 +132,38 @@ class SiteAnimations {
      CARIÑO — Track 1
      ======================== */
   setupCarinoAnimations() {
-    // Nothing extra beyond generic for now — watercolor particles handle the vibe
+    const section = document.getElementById('carino');
+    if (!section) return;
+
+    const b1 = section.querySelector('.butterfly.b1');
+    const b2 = section.querySelector('.butterfly.b2');
+    const b3 = section.querySelector('.butterfly.b3');
+
+    if (b1 && b2 && b3) {
+      ScrollTrigger.create({
+        trigger: section,
+        start: 'top 60%',
+        onEnter: () => {
+          gsap.fromTo(b1,
+            { x: -10, y: 100, opacity: 0 },
+            { x: "120vw", y: "-20vh", opacity: 1, duration: 12, ease: "power1.inOut", repeat: -1, repeatDelay: 2 }
+          );
+          gsap.fromTo(b2,
+            { x: "100vw", y: 200, opacity: 0 },
+            { x: "-50vw", y: "40vh", opacity: 0.9, duration: 14, ease: "power1.inOut", repeat: -1, repeatDelay: 4, delay: 0.5 }
+          );
+          gsap.fromTo(b3,
+            { x: -10, y: -20, opacity: 0 },
+            { x: "100vw", y: "80vh", opacity: 1, duration: 16, ease: "power1.inOut", repeat: -1, repeatDelay: 1, delay: 1.5 }
+          );
+        },
+        onEnterBack: () => {
+          gsap.fromTo(b1, { x: -10, y: 100, opacity: 0 }, { x: "120vw", y: "-20vh", opacity: 1, duration: 12, ease: "power1.inOut", repeat: -1, repeatDelay: 2 });
+          gsap.fromTo(b2, { x: "100vw", y: 200, opacity: 0 }, { x: "-50vw", y: "40vh", opacity: 0.9, duration: 14, ease: "power1.inOut", repeat: -1, repeatDelay: 4, delay: 0.5 });
+          gsap.fromTo(b3, { x: -10, y: -20, opacity: 0 }, { x: "100vw", y: "80vh", opacity: 1, duration: 16, ease: "power1.inOut", repeat: -1, repeatDelay: 1, delay: 1.5 });
+        }
+      });
+    }
   }
 
   /* ========================

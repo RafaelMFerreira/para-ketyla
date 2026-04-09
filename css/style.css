@@ -638,6 +638,50 @@ section {
 #carino .lyric-line { color: var(--cream); }
 #carino .divider { color: var(--terracotta); }
 #carino .personal-message { color: var(--cream); }
+#carino .personal-message em { color: var(--amber); }
+
+/* -- Cariño Butterflies -- */
+.butterflies-scene {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* Below content */
+  pointer-events: none;
+}
+
+.butterfly {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  filter: drop-shadow(0 0 8px rgba(255, 150, 100, 0.4));
+  opacity: 0;
+}
+
+.butterfly.b1 { left: -60px; bottom: 20%; transform: scale(1.5); }
+.butterfly.b2 { right: -60px; top: 40%; transform: scale(2.2) scaleX(-1); }
+.butterfly.b3 { left: -60px; top: 15%; transform: scale(1.2); }
+
+.left-wing {
+  transform-origin: 50px 50px;
+  animation: flapLeft 0.3s ease-in-out infinite alternate;
+}
+
+.right-wing {
+  transform-origin: 50px 50px;
+  animation: flapRight 0.3s ease-in-out infinite alternate;
+}
+
+@keyframes flapLeft {
+  0% { transform: scaleX(1) skewY(0deg); }
+  100% { transform: scaleX(0.2) skewY(-20deg); }
+}
+
+@keyframes flapRight {
+  0% { transform: scaleX(1) skewY(0deg); }
+  100% { transform: scaleX(0.2) skewY(20deg); }
+}
 #carino .personal-message em { color: var(--gold-light); }
 
 /* ========================
